@@ -15,7 +15,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   password Password?
-  notes    Note[]
+  recipe   Recipe[]
+  profile  Profile?
 }
 
 model Password {
@@ -25,10 +26,84 @@ model Password {
   userId String @unique
 }
 
-model Note {
-  id    String @id @default(cuid())
-  title String
-  body  String
+model Profile {
+  name   String
+  avatar String?
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String  @unique
+}
+
+enum Status {
+  FINISHED
+  INPROGRESS
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Ingredient {
+  name             String             @unique
+  RecipeIngredient RecipeIngredient[]
+}
+
+model Categorie {
+  name   String   @id @unique
+  Recipe Recipe[]
+}
+
+model Unit {
+  name             String             @unique
+  RecipeIngredient RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id             String        @id @default(cuid())
+  ingredient     Ingredient    @relation(fields: [ingredientName], references: [name])
+  amount         Int
+  unit           Unit          @relation(fields: [unitName], references: [name])
+  comment        String?
+  recipe         Recipe        @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId       String
+  unitName       String
+  ingredientName String
+  Instruction    Instruction[]
+  listOrder      Int?
+}
+
+model RecipeIngredientTitle {
+  id        String  @id @default(cuid())
+  name      String
+  listOrder Int?
+  Recipe    Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId  String?
+}
+
+model Instruction {
+  id                 String            @id @default(cuid())
+  recipeIngredient   RecipeIngredient? @relation(fields: [recipeIngredientId], references: [id])
+  text               String
+  recipe             Recipe            @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId           String
+  recipeIngredientId String?
+}
+
+model Recipe {
+  id               String                  @id @default(cuid())
+  title            String
+  description      String?
+  blocked          Boolean?
+  status           Status?                 @default(INPROGRESS)
+  media            String?
+  categories       Categorie[]
+  difficulty       Difficulty?
+  minutes          Int?
+  servings         Int?
+  ingredients      RecipeIngredient[]
+  ingredientTitles RecipeIngredientTitle[]
+  instructions     Instruction[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
