@@ -7,11 +7,11 @@ import type { Variant, Target } from "framer-motion";
 import { Reorder, motion, useAnimation } from "framer-motion";
 import type { ReactNode } from "react";
 import { IconButton } from "../Button/IconButton";
-import type { Item } from "./IngredientList";
+import type { ListItem } from "./IngredientList";
 
 type Props = {
   children: ReactNode;
-  item: Item;
+  listItem: ListItem;
   onAddClick: () => void;
   onDeleteClick: () => void;
 };
@@ -49,7 +49,7 @@ const init: Target = {
 };
 
 export function ReorderRecipeItem({
-  item,
+  listItem,
   onAddClick,
   onDeleteClick,
   children,
@@ -60,8 +60,8 @@ export function ReorderRecipeItem({
   const className = "rounded-md grid place-items-center p-1";
   return (
     <Reorder.Item
-      key={`${item.id}`}
-      value={item}
+      key={`${listItem.id}`}
+      value={listItem}
       whileDrag={{
         cursor: "grabbing",
       }}

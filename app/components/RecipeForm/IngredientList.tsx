@@ -17,9 +17,9 @@ export type Item = {
   listOrder: number;
 };
 
-function sortList(
-  listToSort: (RecipeFormIngredient | RecipeFormIngredientTitle)[]
-) {
+export type ListItem = RecipeFormIngredient | RecipeFormIngredientTitle;
+
+function sortList(listToSort: ListItem[]): ListItem[] {
   return [...listToSort].sort((current, prev) => {
     return (current.listOrder || 0) - (prev.listOrder || 0);
   });
@@ -86,7 +86,7 @@ export function IngredientList(): JSX.Element {
           return (
             <ReorderRecipeItem
               key={`${item.id}`}
-              item={item}
+              listItem={item}
               onAddClick={() => {
                 insertIngredient(ingredients.length, {
                   id: `${v4()}-ingredient`,

@@ -1,3 +1,5 @@
+import { createUser } from "~/utils/user.server";
+import { createUserSession } from "~/utils/session.server";
 // Use this to create a new user and login with that user
 // Simply call this with:
 // npx ts-node --require tsconfig-paths/register ./cypress/support/create-user.ts username@example.com
@@ -6,9 +8,6 @@
 
 import { installGlobals } from "@remix-run/node";
 import { parse } from "cookie";
-
-import { createUser } from "~/models/user.server";
-import { createUserSession } from "~/session.server";
 
 installGlobals();
 
