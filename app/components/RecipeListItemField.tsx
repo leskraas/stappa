@@ -38,7 +38,7 @@ export function RecipeListItemField({
           placeholder: label,
           ...rest,
         })}
-        className={`w-full bg-inherit py-1 placeholder-stone-500 outline-none ${className}`}
+        className={`w-full bg-inherit placeholder-stone-500 outline-none ${className}`}
       />
       {error && (
         <span
