@@ -6,9 +6,8 @@ import {
 import type { Variant, Target } from "framer-motion";
 import { Reorder, motion, useAnimation } from "framer-motion";
 import type { ReactNode } from "react";
-import { useWindowSize } from "~/hooks/useWindowSize";
-import type { Item } from "~/routes/oppskrifter/$";
 import { IconButton } from "../Button/IconButton";
+import type { Item } from "./IngredientList";
 
 type Props = {
   children: ReactNode;
@@ -55,7 +54,6 @@ export function ReorderRecipeItem({
   onDeleteClick,
   children,
 }: Props): JSX.Element {
-  const { isPhone } = useWindowSize();
   const moveControls = useAnimation();
   const addControls = useAnimation();
   const removeControls = useAnimation();

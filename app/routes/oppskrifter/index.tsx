@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/server-runtime";
 import { json } from "@remix-run/node";
 import { getDiscoveryRecipes } from "~/utils/recipes.server";

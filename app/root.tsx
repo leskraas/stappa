@@ -4,17 +4,15 @@ import {
   Links,
   LiveReload,
   Meta,
-  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
   useCatch,
-  useLocation,
 } from "@remix-run/react";
 
 import { getUser } from "./utils/session.server";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
-import { useOptionalUser } from "./utils";
+// import { useOptionalUser } from "./utils";
 import { Navbar } from "./components/Navbar";
 
 export const links: LinksFunction = () => {
@@ -58,7 +56,7 @@ export default function App() {
 // the footer and stuff, which is much better.
 export function ErrorBoundary({ error }: { error: Error }) {
   // console.error(error)
-  const location = useLocation();
+  // const location = useLocation();
   return (
     <html lang="en" className="dark antialiased">
       <head>
@@ -82,7 +80,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
 export function CatchBoundary() {
   const caught = useCatch();
-  const location = useLocation();
+  // const location = useLocation();
   // console.error('CatchBoundary', caught)s
   if (caught.status === 404) {
     return (

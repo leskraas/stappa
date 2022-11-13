@@ -1,24 +1,24 @@
 import type { ActionFunction } from "@remix-run/node";
-import {
-  json,
-  unstable_composeUploadHandlers,
-  unstable_createMemoryUploadHandler,
-  unstable_parseMultipartFormData,
-} from "@remix-run/node";
-import { Form, useActionData, useCatch } from "@remix-run/react";
-import sharp from "sharp";
-import invariant from "tiny-invariant";
+// import {
+//   json,
+//   unstable_composeUploadHandlers,
+//   unstable_createMemoryUploadHandler,
+//   unstable_parseMultipartFormData,
+// } from "@remix-run/node";
+import { Form } from "@remix-run/react";
+// import sharp from "sharp";
+// import invariant from "tiny-invariant";
 import { RecipeField } from "~/components/RecipeField";
-import { requireUserId } from "~/utils/session.server";
-import { uploadImage } from "~/utils/uploadImage.server";
+// import { requireUserId } from "~/utils/session.server";
+// import { uploadImage } from "~/utils/uploadImage.server";
 
-type ActionData = {
-  errorMsg?: string;
-  imgSrc?: string;
-};
+// type ActionData = {
+//   errorMsg?: string;
+//   imgSrc?: string;
+// };
 
 export const action: ActionFunction = async ({ request }) => {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   //   const uploadHandler = unstable_composeUploadHandlers(
   //     async ({ name, contentType, data, filename }) => {
   //       return;
@@ -48,7 +48,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const data = useActionData<ActionData>();
+  // const data = useActionData<ActionData>();
   return (
     <>
       {/* <Form method="post" encType="multipart/form-data">

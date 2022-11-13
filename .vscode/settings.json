@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/larserikskraastad/dev/hobby/stappa/.github/workflows/deploy.yml"
+  }
+}
