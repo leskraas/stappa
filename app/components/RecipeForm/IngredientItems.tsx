@@ -18,7 +18,7 @@ export function IngredientItems({
     (ingredient) => ingredient.id === item.id
   );
   return (
-    <div className="grid w-full grid-cols-[5ch_minmax(4ch,8ch)_minmax(8ch,_2fr)_minmax(7ch,_1fr)]">
+    <div className="grid w-full grid-cols-[7ch_minmax(4ch,8ch)_minmax(8ch,_2fr)_minmax(7ch,_1fr)] gap-0.5">
       <HiddenField
         name={`ingredients[${currentPositionIndex}].${Prisma.RecipeIngredientScalarFieldEnum.id}`}
       />

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 type ButtonProps = Omit<HTMLMotionProps<"button">, "aria-labelledby"> & {
   icon?: JSX.Element;
-  variant?: "green";
+  variant?: "green" | "solid";
 };
 
 export function Button({

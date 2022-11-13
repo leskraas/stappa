@@ -23,9 +23,8 @@ export function Form({ defaultValues, actionPath }: Props): JSX.Element {
       >
         <RecipeField
           label="Tittel"
-          className="py-4 text-3xl font-bold text-stone-800"
+          className="text-3xl font-bold text-stone-800"
           hideLabel
-          defaultValue="hei"
           name={Prisma.RecipeScalarFieldEnum.title}
         />
         <RecipeField
