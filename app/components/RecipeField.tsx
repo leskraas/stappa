@@ -25,7 +25,7 @@ export function RecipeField({
   const inputHight = "h-6";
 
   return (
-    <div className="group flex flex-1 flex-col gap-2 hover:bg-stone-100">
+    <div className="group flex flex-1 flex-col gap-2 rounded-md hover:bg-stone-200">
       <div className="flex items-center gap-2">
         <div className={`${inputHight} w-6`}>
           {iconElement && (
@@ -55,7 +55,7 @@ export function RecipeField({
                 placeholder: inlineLabel ? label : undefined,
                 ...rest,
               })}
-              className={`${inputHight} flex-1 border-2 border-none border-gray-800 outline-none group-hover:bg-inherit ${className}`}
+              className={`${inputHight} flex-1 border-2 border-none border-gray-800 bg-inherit outline-none group-hover:bg-inherit ${className}`}
             />
           </div>
         )}

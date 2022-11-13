@@ -16,7 +16,7 @@ export function AnimatedShadow({
               opacity: 1,
             },
           }}
-          className="absolute inset-0 -z-10 opacity-0 shadow-lg  rounded-inherit"
+          className="absolute inset-0 -z-10 opacity-0 shadow-md rounded-inherit"
         />
       </div>
     </motion.div>

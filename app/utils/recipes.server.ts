@@ -35,80 +35,10 @@ export function getRecipeIngredientIds({
   return recipe;
 }
 
-export function deleteRecipeIngredient({ id }: Pick<RecipeIngredient, "id">) {
-  const recipe = prisma.recipeIngredient.delete({
-    where: { id },
-  });
-  return recipe;
-}
-
 export function getDiscoveryRecipes() {
   return prisma.recipe.findMany({
     select: { id: true, title: true, media: true },
     orderBy: { updatedAt: "desc" },
-  });
-}
-
-// export function getNoteListItems({ userId }: { userId: User["id"] }) {
-//   return prisma.recipe.findMany({
-//     where: { userId },
-//     select: { id: true, title: true },
-//     orderBy: { updatedAt: "desc" },
-//   });
-// }
-
-type UpsertRecipeIngredients = Pick<
-  Prisma.RecipeIngredientUncheckedCreateInput,
-  "id" | "amount" | "comment" | "recipeId" | "ingredientName" | "unitName"
->;
-
-export function recipeIngredientCreateUpdateInput({
-  ingredientName,
-  unitName,
-  recipeId,
-  ...args
-}: Omit<UpsertRecipeIngredients, "id">) {
-  return {
-    ...args,
-    unit: {
-      connectOrCreate: {
-        create: {
-          name: unitName,
-        },
-        where: {
-          name: unitName,
-        },
-      },
-    },
-    ingredient: {
-      connectOrCreate: {
-        create: {
-          name: ingredientName,
-        },
-        where: {
-          name: ingredientName,
-        },
-      },
-    },
-
-    recipe: {
-      connect: {
-        id: recipeId,
-      },
-    },
-  };
-}
-
-export function upsertRecipeIngredients({
-  id,
-  ...args
-}: UpsertRecipeIngredients) {
-  return prisma.recipeIngredient.upsert({
-    create: recipeIngredientCreateUpdateInput(args),
-    update: recipeIngredientCreateUpdateInput(args),
-    where: {
-      id,
-    },
   });
 }
 
@@ -183,6 +113,94 @@ export function createRecipe({
     },
   });
 }
+type UpsertRecipeIngredients = Pick<
+  Prisma.RecipeIngredientUncheckedCreateInput,
+  "id" | "amount" | "comment" | "recipeId" | "ingredientName" | "unitName"
+>;
+function recipeIngredientCreateUpdateInput({
+  ingredientName,
+  unitName,
+  recipeId,
+  ...args
+}: Omit<UpsertRecipeIngredients, "id">): Prisma.RecipeIngredientCreateInput {
+  return {
+    ...args,
+    unit: {
+      connectOrCreate: {
+        create: {
+          name: unitName,
+        },
+        where: {
+          name: unitName,
+        },
+      },
+    },
+    ingredient: {
+      connectOrCreate: {
+        create: {
+          name: ingredientName,
+        },
+        where: {
+          name: ingredientName,
+        },
+      },
+    },
+
+    recipe: {
+      connect: {
+        id: recipeId,
+      },
+    },
+  };
+}
+
+export function upsertRecipeIngredients({
+  id,
+  ...args
+}: UpsertRecipeIngredients) {
+  return prisma.recipeIngredient.upsert({
+    create: recipeIngredientCreateUpdateInput(args),
+    update: recipeIngredientCreateUpdateInput(args),
+    where: {
+      id,
+    },
+  });
+}
+
+type UpsertRecipeIngredientTitle = Pick<
+  Prisma.RecipeIngredientTitleUncheckedCreateInput,
+  "id" | "recipeId" | "listOrder" | "name"
+>;
+
+function recipeIngredientTitleCreateUpdateInput({
+  recipeId,
+  ...args
+}: Omit<
+  UpsertRecipeIngredientTitle,
+  "id"
+>): Prisma.RecipeIngredientTitleCreateInput {
+  return {
+    ...args,
+    recipe: {
+      connect: {
+        id: recipeId,
+      },
+    },
+  };
+}
+
+export function upsertRecipeIngredientTitle({
+  id,
+  ...args
+}: UpsertRecipeIngredientTitle) {
+  return prisma.recipeIngredientTitle.upsert({
+    create: recipeIngredientTitleCreateUpdateInput(args),
+    update: recipeIngredientTitleCreateUpdateInput(args),
+    where: {
+      id,
+    },
+  });
+}
 
 export function updateRecipe({
   userId,
@@ -226,3 +244,10 @@ export function updateRecipe({
 //     where: { id, userId },
 //   });
 // }
+
+export function deleteRecipeIngredient({ id }: Pick<RecipeIngredient, "id">) {
+  const recipe = prisma.recipeIngredient.delete({
+    where: { id },
+  });
+  return recipe;
+}

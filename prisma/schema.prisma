@@ -46,17 +46,17 @@ enum Difficulty {
 
 model Ingredient {
   name             String             @unique
-  RecipeIngredient RecipeIngredient[]
+  recipeIngredient RecipeIngredient[]
 }
 
 model Categorie {
   name   String   @id @unique
-  Recipe Recipe[]
+  recipe Recipe[]
 }
 
 model Unit {
   name             String             @unique
-  RecipeIngredient RecipeIngredient[]
+  recipeIngredient RecipeIngredient[]
 }
 
 model RecipeIngredient {
@@ -69,16 +69,16 @@ model RecipeIngredient {
   recipeId       String
   unitName       String
   ingredientName String
-  Instruction    Instruction[]
+  instruction    Instruction[]
   listOrder      Int?
 }
 
 model RecipeIngredientTitle {
-  id        String  @id @default(cuid())
+  id        String @id @default(cuid())
   name      String
   listOrder Int?
-  Recipe    Recipe? @relation(fields: [recipeId], references: [id])
-  recipeId  String?
+  recipe    Recipe @relation(fields: [recipeId], references: [id])
+  recipeId  String
 }
 
 model Instruction {

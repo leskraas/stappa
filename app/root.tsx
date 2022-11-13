@@ -40,7 +40,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full bg-stone-50">
         <Navbar />
         <main className="p-4">
           <Outlet />
@@ -65,7 +65,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <title>Oh no...</title>
         <Links />
       </head>
-      <body className="bg-white transition duration-500 dark:bg-gray-900">
+      <body className="transition duration-500 dark:bg-gray-900">
         {/* <ErrorPage
           heroProps={{
             title: '500 - Oh no, something did not go well.',

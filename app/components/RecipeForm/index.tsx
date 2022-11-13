@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import { ValidatedForm } from "remix-validated-form";
 import type { RecipeForm } from "~/routes/oppskrifter/$";
 import { recipeValidator } from "~/routes/oppskrifter/$";
+import { Button } from "../Button";
 import { RecipeField } from "../RecipeField";
 import { IngredientList } from "./IngredientList";
 
@@ -38,9 +39,11 @@ export function Form({ defaultValues, actionPath }: Props): JSX.Element {
           iconElement={<ClockIcon />}
           type="number"
         />
-        <h2 className="text-md font-bold text-stone-800">Ingredienser</h2>
+        <h2 className="text-lg font-bold text-stone-800">Ingredienser</h2>
         <IngredientList />
-        <button type="submit">lagre</button>
+        <Button variant="green" type="submit">
+          Lagre
+        </Button>
       </ValidatedForm>
     </>
   );

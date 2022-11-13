@@ -7,18 +7,18 @@ import type { Variant, Target } from "framer-motion";
 import { Reorder, motion, useAnimation } from "framer-motion";
 import type { ReactNode } from "react";
 import { useWindowSize } from "~/hooks/useWindowSize";
-import type { RecipeFormIngredient } from "~/routes/oppskrifter/$";
+import type { Item } from "~/routes/oppskrifter/$";
 import { IconButton } from "../Button/IconButton";
 
 type Props = {
   children: ReactNode;
-  item: RecipeFormIngredient;
+  item: Item;
   onAddClick: () => void;
   onDeleteClick: () => void;
 };
 
 const childHover: Variant = {
-  backgroundColor: "#f5f5f4",
+  backgroundColor: "#e7e5e4",
   color: "#78716c",
 };
 
@@ -91,43 +91,41 @@ export function ReorderRecipeItem({
           removeControls.start(hidden);
         }}
       >
-        {!isPhone && (
-          <>
-            <motion.div
-              initial={init}
-              animate={moveControls}
-              onHoverStart={() => {
-                moveControls.start(childHover);
-              }}
-              onHoverEnd={() => {
-                moveControls.start(childHoverEnd);
-              }}
-              whileTap={{
-                cursor: "grabbing",
-              }}
-              className={`${className} cursor-grab `}
-            >
-              <ChevronUpDownIcon className="h-6 w-6" />
-            </motion.div>
+        <>
+          <motion.div
+            initial={init}
+            animate={moveControls}
+            onHoverStart={() => {
+              moveControls.start(childHover);
+            }}
+            onHoverEnd={() => {
+              moveControls.start(childHoverEnd);
+            }}
+            whileTap={{
+              cursor: "grabbing",
+            }}
+            className={`${className} hidden cursor-grab sm:block`}
+          >
+            <ChevronUpDownIcon className="h-6 w-6" />
+          </motion.div>
 
-            <IconButton
-              type="button"
-              text="Legg til"
-              className={`${className}`}
-              onClick={onAddClick}
-              icon={<PlusSmallIcon className="h-6 w-6" />}
-              initial={init}
-              animate={addControls}
-              onHoverStart={() => {
-                addControls.start(childHover);
-              }}
-              onHoverEnd={() => {
-                addControls.start(childHoverEnd);
-              }}
-            />
-          </>
-        )}
-        <div className="flex items-center gap-1">{children}</div>
+          <IconButton
+            type="button"
+            text="Legg til"
+            className={`${className} hidden sm:block`}
+            onClick={onAddClick}
+            icon={<PlusSmallIcon className="h-6 w-6" />}
+            initial={init}
+            animate={addControls}
+            onHoverStart={() => {
+              addControls.start(childHover);
+            }}
+            onHoverEnd={() => {
+              addControls.start(childHoverEnd);
+            }}
+          />
+        </>
+        {children}
         <IconButton
           type="button"
           text="Slett"

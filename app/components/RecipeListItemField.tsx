@@ -21,10 +21,10 @@ export function RecipeListItemField({
   return (
     <div
       className={classNames(
-        "group relative my-1 flex gap-2 rounded-md bg-inherit p-1",
+        "group relative my-1 flex w-full gap-2 rounded-md bg-inherit p-1 duration-300",
         { "outline outline-2 outline-offset-[-1px] outline-red-600": !!error },
         { "hover:outline-red-800": !!error },
-        { "hover:bg-stone-100": !error }
+        { "hover:bg-stone-200": !error }
       )}
     >
       <label className="sr-only text-stone-600" htmlFor={name}>
@@ -38,12 +38,12 @@ export function RecipeListItemField({
           placeholder: label,
           ...rest,
         })}
-        className={`w-full py-1 outline-none group-hover:bg-inherit ${className}`}
+        className={`w-full bg-inherit py-1 placeholder-stone-500 outline-none ${className}`}
       />
       {error && (
         <span
           className={classNames(
-            "absolute bottom-full translate-y-2 bg-white p-0.5 text-xs text-red-600",
+            "absolute bottom-full translate-y-2 bg-stone-50 p-0.5 text-xs text-red-600 duration-300",
             { "group-hover:text-red-800": !!error }
           )}
         >

@@ -8,7 +8,6 @@ import {
   useCatch,
   useLoaderData,
   useParams,
-  useTransition,
 } from "@remix-run/react";
 import { getUserId, requireUserId } from "~/utils/session.server";
 import type { Prisma } from "@prisma/client";
@@ -20,6 +19,7 @@ import {
   getRecipeIngredientIds,
   updateRecipe,
   upsertRecipeIngredients,
+  upsertRecipeIngredientTitle,
 } from "~/utils/recipes.server";
 import { Form } from "~/components/RecipeForm";
 import invariant from "tiny-invariant";
@@ -69,6 +69,7 @@ export const recipeValidator = withZod(zfd.formData(jsonZod));
 
 export type RecipeForm = z.infer<typeof recipeZodSchema>;
 export type RecipeFormIngredient = z.infer<typeof ingredientsZod>;
+export type RecipeFormIngredientTitle = z.infer<typeof ingredientTitlesZod>;
 type PageAction = "new" | "edit" | "view";
 type PageActionOutput =
   | {
@@ -106,12 +107,16 @@ export async function action({ request, params }: ActionArgs) {
   const ingredientsToDelete = existingRecipeIngredients.filter(
     (e) => !ingredients?.find((t) => t.id === e.id)
   );
+
+  ingredientTitles?.forEach(async (title) => {
+    await upsertRecipeIngredientTitle({
+      ...title,
+      recipeId,
+    });
+  });
   ingredients?.forEach(async (ingredient) => {
-    const { ingredientName, unitName, ...rest } = ingredient;
     await upsertRecipeIngredients({
-      ...rest,
-      ingredientName,
-      unitName,
+      ...ingredient,
       recipeId,
     });
   });

@@ -1,4 +1,5 @@
-import { HTMLMotionProps, motion } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 
 type IconButtonProps = Omit<HTMLMotionProps<"button">, "aria-labelledby"> & {
   icon: JSX.Element;
